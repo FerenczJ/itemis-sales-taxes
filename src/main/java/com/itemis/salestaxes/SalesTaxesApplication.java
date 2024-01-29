@@ -2,23 +2,13 @@ package com.itemis.salestaxes;
 
 import com.itemis.salestaxes.business.Basket;
 import com.itemis.salestaxes.business.TaxCalculatorImpl;
-import com.itemis.salestaxes.model.Item;
 import com.itemis.salestaxes.util.ParseException;
-import com.itemis.salestaxes.util.ParseUtil;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
-
-import static com.itemis.salestaxes.util.ParseUtil.parseItem;
-import static java.util.stream.Collectors.toList;
 
 public class SalesTaxesApplication {
     public static void main(String[] args) {

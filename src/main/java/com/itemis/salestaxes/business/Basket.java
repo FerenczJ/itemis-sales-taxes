@@ -2,11 +2,6 @@ package com.itemis.salestaxes.business;
 
 import com.itemis.salestaxes.model.Item;
 import com.itemis.salestaxes.util.ParseException;
-import lombok.Getter;
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 

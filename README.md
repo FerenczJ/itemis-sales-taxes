@@ -35,6 +35,7 @@ java --enable-preview -jar target/itemis-sales-taxes-0.1.0.jar target/classes/in
 ```
 
 ## NOTES
+* Forgot to use a feature branch, I would never do that :)
 * I tried out experimental feature of Java 21 with strings, --enable-preview needed for this
 * Input files packaged to the application for faster evaluation, I wouldn't do that in real world scenario :)
 * I used enums for products, in a real world scenario I would use a database to get information about products.
