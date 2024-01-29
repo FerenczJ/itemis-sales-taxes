@@ -1,6 +1,6 @@
 package com.itemis.salestaxes;
 
-import com.itemis.salestaxes.business.Basket;
+import com.itemis.salestaxes.business.BasketImpl;
 import com.itemis.salestaxes.business.TaxCalculatorImpl;
 import com.itemis.salestaxes.util.ParseException;
 
@@ -19,7 +19,7 @@ public class SalesTaxesApplication {
             allLines.forEach(System.out::println);
             System.out.println();
             System.out.println("### OUTPUT:");
-            var basket = new Basket(new TaxCalculatorImpl(), allLines);
+            var basket = new BasketImpl(new TaxCalculatorImpl(), allLines);
             basket.out();
         } catch (IOException e) {
             System.out.println(STR."Error while open file: \{e.getMessage()}");
