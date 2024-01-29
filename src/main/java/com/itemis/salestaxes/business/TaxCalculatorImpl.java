@@ -15,7 +15,7 @@ public class TaxCalculatorImpl implements TaxCalculator {
         var result = 0.0;
 
         // apply basic sales tax
-        if(ProductType.OTHER.equals(item.getProduct().getType())) {
+        if(item.getProduct().isImportDutyApplies()) {
             result += item.getPrice() * BASIC_SALES_TAX;
         }
 

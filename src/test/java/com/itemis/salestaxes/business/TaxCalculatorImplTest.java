@@ -26,7 +26,7 @@ class TaxCalculatorImplTest {
             new Item(TEST_QUANTITY, Product.MUSIC_CD, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.CHOCOLATE_BAR, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.IMPORTED_BOX_OF_CHOCOLATES, TEST_PRICE),
-            new Item(TEST_QUANTITY, Product.BOTTLE_OF_PARFUME, TEST_PRICE),
+            new Item(TEST_QUANTITY, Product.BOTTLE_OF_PERFUME, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.PACKET_OF_HEADACHE_PILLS, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.BOX_OF_IMPORTED_CHOCOLATE, TEST_PRICE));
 
@@ -36,12 +36,12 @@ class TaxCalculatorImplTest {
     @Test
     void calculateTax_shouldApplyBasicSalesTax() {
         var expected = round((BASE_SALES_TAX + IMPORT_DUTY_TAX) * 100.0 ) / 100.0 ;
-        var otherItems = testItems.stream()
-                            .filter(x-> ProductType.OTHER.equals(x.getProduct().getType()))
+        var importDutyItems = testItems.stream()
+                            .filter(x-> x.getProduct().isImportDutyApplies())
                             .toList();
 
 
-        otherItems.forEach(item -> {
+        importDutyItems.forEach(item -> {
             assertEquals(expected, taxCalculator.calculateTax(item));
         });
     }
@@ -49,12 +49,12 @@ class TaxCalculatorImplTest {
     @Test
     void calculateTax_shouldNotApplyBasicSalesTax() {
         var expected = round(IMPORT_DUTY_TAX * 100.0 ) / 100.0 ;
-        var notOtherItems = testItems.stream()
-                .filter(x-> !ProductType.OTHER.equals(x.getProduct().getType()))
+        var notImportDutyItems = testItems.stream()
+                .filter(x-> !x.getProduct().isImportDutyApplies())
                 .toList();
 
 
-        notOtherItems.forEach(item -> {
+        notImportDutyItems.forEach(item -> {
             assertEquals(expected, taxCalculator.calculateTax(item));
         });
     }
