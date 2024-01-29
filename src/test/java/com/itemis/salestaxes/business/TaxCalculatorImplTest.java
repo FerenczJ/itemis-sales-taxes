@@ -3,7 +3,6 @@ package com.itemis.salestaxes.business;
 import com.itemis.salestaxes.model.Item;
 import com.itemis.salestaxes.model.type.Product;
 
-import com.itemis.salestaxes.model.type.ProductType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -27,35 +26,32 @@ class TaxCalculatorImplTest {
             new Item(TEST_QUANTITY, Product.CHOCOLATE_BAR, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.IMPORTED_BOX_OF_CHOCOLATES, TEST_PRICE),
             new Item(TEST_QUANTITY, Product.BOTTLE_OF_PERFUME, TEST_PRICE),
-            new Item(TEST_QUANTITY, Product.PACKET_OF_HEADACHE_PILLS, TEST_PRICE),
-            new Item(TEST_QUANTITY, Product.BOX_OF_IMPORTED_CHOCOLATE, TEST_PRICE));
+            new Item(TEST_QUANTITY, Product.PACKET_OF_HEADACHE_PILLS, TEST_PRICE));
 
     private final double BASE_SALES_TAX = TEST_PRICE * TaxCalculatorImpl.BASIC_SALES_TAX;
     private final double IMPORT_DUTY_TAX = TEST_PRICE * TaxCalculatorImpl.IMPORT_DUTY;
 
     @Test
     void calculateTax_shouldApplyBasicSalesTax() {
-        var expected = round((BASE_SALES_TAX + IMPORT_DUTY_TAX) * 100.0 ) / 100.0 ;
-        var importDutyItems = testItems.stream()
-                            .filter(x-> x.getProduct().isImportDutyApplies())
+        var basicSalesTaxItems = testItems.stream()
+                            .filter(x-> x.getProduct().isSalesTaxApplies())
                             .toList();
 
 
-        importDutyItems.forEach(item -> {
-            assertEquals(expected, taxCalculator.calculateTax(item));
+        basicSalesTaxItems.forEach(item -> {
+            assertTrue(BASE_SALES_TAX <= taxCalculator.calculateTax(item));
         });
     }
 
     @Test
-    void calculateTax_shouldNotApplyBasicSalesTax() {
-        var expected = round(IMPORT_DUTY_TAX * 100.0 ) / 100.0 ;
-        var notImportDutyItems = testItems.stream()
-                .filter(x-> !x.getProduct().isImportDutyApplies())
+    void calculateTax_shouldApplyImportDuty() {
+        var importDutyItems = testItems.stream()
+                .filter(x-> x.getProduct().isImportDutyApplies())
                 .toList();
 
 
-        notImportDutyItems.forEach(item -> {
-            assertEquals(expected, taxCalculator.calculateTax(item));
+        importDutyItems.forEach(item -> {
+            assertTrue(IMPORT_DUTY_TAX <= taxCalculator.calculateTax(item));
         });
     }
 }

@@ -2,7 +2,6 @@ package com.itemis.salestaxes.util;
 
 import com.itemis.salestaxes.model.Item;
 import com.itemis.salestaxes.model.type.Product;
-import com.itemis.salestaxes.model.type.ProductType;
 
 public class ParseUtil {
     public static Item parseItem(String input) throws ParseException {

@@ -10,4 +10,8 @@ public class Item {
     private long quantity;
     private Product product;
     private double price;
+
+    public String stringify(){
+        return STR."\{quantity} \{product.toString().toLowerCase().replaceAll("_", " ")}: \{price}";
+    }
 }

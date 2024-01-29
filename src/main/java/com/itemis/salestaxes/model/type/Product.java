@@ -7,14 +7,20 @@ public enum Product {
     IMPORTED_BOX_OF_CHOCOLATES,
     IMPORTED_BOTTLE_OF_PERFUME,
     BOTTLE_OF_PERFUME,
-    PACKET_OF_HEADACHE_PILLS,
-    BOX_OF_IMPORTED_CHOCOLATE;
+    PACKET_OF_HEADACHE_PILLS;
 
 
-    public boolean isImportDutyApplies(){
+    public boolean isImportDutyApplies() {
         return switch(this) {
-            case BOOK, BOTTLE_OF_PERFUME, MUSIC_CD -> true;
+            case IMPORTED_BOX_OF_CHOCOLATES, IMPORTED_BOTTLE_OF_PERFUME -> true;
             default -> false;
+        };
+    }
+
+    public boolean isSalesTaxApplies() {
+        return switch(this) {
+            case BOOK, CHOCOLATE_BAR, PACKET_OF_HEADACHE_PILLS, IMPORTED_BOX_OF_CHOCOLATES -> false;
+            default -> true;
         };
     }
 }
