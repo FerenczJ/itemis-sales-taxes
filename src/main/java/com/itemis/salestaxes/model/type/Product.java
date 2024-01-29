@@ -1,22 +1,20 @@
 package com.itemis.salestaxes.model.type;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor
 public enum Product {
-    BOOK("book", ProductType.BOOK),
-    MUSIC_CD("music CD", ProductType.OTHER),
-    CHOCOLATE_BAR("chocolate bar", ProductType.FOOD),
-    IMPORTED_BOX_OF_CHOCOLATES("imported box of chocolates", ProductType.FOOD),
-    IMPORTED_BOTTLE_OF_PARFUME("imported bottle of perfume", ProductType.OTHER),
-    BOTTLE_OF_PARFUME("bottle of perfume", ProductType.OTHER),
-    PACKET_OF_HEADACHE_PILLS("packet of headache pills", ProductType.MEDICAL),
-    BOX_OF_IMPORTED_CHOCOLATE("box of imported chocolates", ProductType.FOOD);
+    BOOK,
+    MUSIC_CD,
+    CHOCOLATE_BAR,
+    IMPORTED_BOX_OF_CHOCOLATES,
+    IMPORTED_BOTTLE_OF_PERFUME,
+    BOTTLE_OF_PERFUME,
+    PACKET_OF_HEADACHE_PILLS,
+    BOX_OF_IMPORTED_CHOCOLATE;
 
-    @Getter
-    private final String name;
 
-    @Getter
-    private final ProductType type;
+    public boolean isImportDutyApplies(){
+        return switch(this) {
+            case BOOK, BOTTLE_OF_PERFUME, MUSIC_CD -> true;
+            default -> false;
+        };
+    }
 }
